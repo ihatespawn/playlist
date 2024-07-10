@@ -21,8 +21,9 @@ video links are seperated by semicolons
 ## to-do list
 **features**
 - [ ] add video support
+
 **services**
 - [ ] add tiktok support
 - [ ] add soundcloud support
-- [ ] add bilibili support
+- [ ] add bilibili support <br>
       wip: [`support/bilibili` branch](https://github.com/ihatespawn/playlist/tree/support/bilibili)
