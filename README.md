@@ -25,5 +25,9 @@ video links are seperated by semicolons
 **services**
 - [ ] add tiktok support
 - [ ] add soundcloud support
-- [ ] add bilibili support <br>
-      wip: [`support/bilibili` branch](https://github.com/ihatespawn/playlist/tree/support/bilibili)
+
+
+**improvements**
+- [ ] rewrite everything in js <br>
+      wip: [`rewrite` branch](https://github.com/ihatespawn/playlist/tree/rewrite)
+- [ ] add support for youtube.com/watch?v=X&list=PLY links
