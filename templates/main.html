@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Playlist Videos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --text: #e1e1e1;
+            --background: #000000;
+            --primary: #82fbfd;
+            --secondary: #033ca3;
+            --accent: #2355fb;
+            --accent-subtext: rgb(110, 110, 110);
+        }
+
+        body, html {
+            color: var(--text);
+            background-color: var(--background);
+            font-family: "Instrument Sans";
+        }
+
+        body {
+            display: flex;
+            align-content: center;
+            min-height: 100vh;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        input {
+            background: none;
+            width: 100%;
+            color: var(--text);
+            border: 0;
+            outline: none;
+            border-bottom: .1rem solid var(--accent-subtext);
+            font-family: "Noto Sans Mono", "Consolas", "SF Mono", monospace;
+        }
+
+        #download-area-top {
+            display: flex;
+            width: 40rem;
+        }
+
+        svg {
+            padding: .2rem;
+            border-bottom: .1rem solid var(--accent-subtext);
+            font-family: "Noto Sans Mono", "Consolas", "SF Mono", monospace;
+            color: var(--accent-subtext);
+            width: 20px;
+        }
+
+        button {
+            color: var(--text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 1rem;
+            letter-spacing: -.35rem;
+            font-weight: 400 !important;
+            font-family: "Noto Sans Mono", "Consolas", "SF Mono", monospace;
+            font-size: 1.8rem;
+        }
+
+        /* span {
+            position: absolute;
+            top: 100%;
+        } */
+    </style>
+    <link rel="stylesheet" href="/files/font.css">
+<script>
+    function getPlaylistVideos() {
+        var playlist = document.getElementById("playlistId").value
+
+        fetch('/getvideos?playlist=' + playlist)
+            .then(response => response.text())
+            .then(text => {
+                if (text.startsWith("https://youtube.com")) {
+                    var links = text.split(";")
+                    links.forEach((element, index) => {
+                        setTimeout(() => {
+                            fetch("https://api.cobalt.tools/api/json", {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    url: element,
+                                    vCodec: "av1",
+                                    vQuality: "1440",
+                                    filenamePattern:"pretty",
+                                    isAudioOnly:"true"
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(content => {
+                                try {
+                                    if (content.url) {
+                                        window.location = content.url
+                                    } else {
+                                        console.warn(content)
+                                    }
+                                } catch {}
+                            });
+                        }, index * 3000);
+                });
+
+                } else {
+                    alert(text)
+                }
+            });
+    }
+</script>
+</head>
+<body>
+    <!-- design *borrowed* from cobalt.tools -->
+    <div class="container">
+        <h1>cobalt playlist downloader</h1>
+        <div id="download-area-top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="currentColor" d="M137.54 186.36a8 8 0 0 1 0 11.31l-9.94 10a56 56 0 0 1-79.22-79.27l24.12-24.12a56 56 0 0 1 76.81-2.28a8 8 0 1 1-10.64 12a40 40 0 0 0-54.85 1.63L59.7 139.72a40 40 0 0 0 56.58 56.58l9.94-9.94a8 8 0 0 1 11.32 0Zm70.08-138a56.08 56.08 0 0 0-79.22 0l-9.94 9.95a8 8 0 0 0 11.32 11.31l9.94-9.94a40 40 0 0 1 56.58 56.58l-24.12 24.14a40 40 0 0 1-54.85 1.6a8 8 0 1 0-10.64 12a56 56 0 0 0 76.81-2.26l24.12-24.12a56.08 56.08 0 0 0 0-79.24Z"></path></svg>
+            <input type="text" id="playlistId">
+            <button onclick="getPlaylistVideos()">>></button>
+        </div>
+        <ul id="videoList"></ul>
+    </div>
+</body>
+</html>
