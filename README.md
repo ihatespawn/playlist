@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/user/6c9bc4ed-4951-40f8-ad5f-ea2207a8d7ef/project/24a27e74-4c77-437f-841f-b3f4cfdb7d19.svg)](https://wakatime.com/badge/user/6c9bc4ed-4951-40f8-ad5f-ea2207a8d7ef/project/24a27e74-4c77-437f-841f-b3f4cfdb7d19)
 # cobalt playlist downloader
 a lot of people have been asking for this, so i made it. paste the link, download the first file, allow multiple file downloads if you didn't do that before and keep saving files until it finishes.
 
