@@ -27,7 +27,6 @@ video links are seperated by semicolons
 - [ ] add tiktok support
 - [ ] add soundcloud support
 
-
 **improvements**
 - [ ] rewrite everything in js <br>
       wip: [`rewrite` branch](https://github.com/ihatespawn/playlist/tree/rewrite)
