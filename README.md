@@ -22,6 +22,7 @@ video links are seperated by semicolons
 ## to-do list
 **features**
 - [ ] add video support
+- [ ] zip before downloading
 
 **services**
 - [ ] add tiktok support
