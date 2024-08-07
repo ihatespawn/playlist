@@ -31,4 +31,4 @@ video links are seperated by semicolons
 **improvements**
 - [ ] rewrite everything in js <br>
       wip: [`rewrite` branch](https://github.com/ihatespawn/playlist/tree/rewrite)
-- [ ] add support for youtube.com/watch?v=X&list=PLY links
+- [x] add support for youtube.com/watch?v=X&list=PLY links
