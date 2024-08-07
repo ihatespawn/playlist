@@ -14,7 +14,7 @@ def getvideos():
     playlist = request.args.get('playlist')
     domain = playlist.split("://")[1].split("/")[0]
     if "youtube" in domain:
-        playlistid = playlist.split("playlist?list=")[1]
+        playlistid = playlist.split("list=")[1]
         rq = requests.get(f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={playlistid}&maxResults=1000&key=" + os.environ.get('YOUTUBE_API_KEY', ''))
         req = rq.json()
         if req.get('error'):
